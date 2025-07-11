@@ -7,6 +7,9 @@ public class Module1Test {
   @Test
   public void coveredByUnitTest() {
     Module1 module1 = new Module1();
+
+    System.out.println("Creating a PR");
+    
     module1.coveredByUnitTest();
   }
 }
