@@ -9,7 +9,7 @@ public class Module1Test {
     Module1 module1 = new Module1();
 
     System.out.println("Juste un test");
-    int var0 = 0;
+    int var0 = 1;
     int var1 = 3;
 
     int var2 = var1 / var0;
