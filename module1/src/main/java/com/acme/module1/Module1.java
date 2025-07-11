@@ -4,7 +4,11 @@ public class Module1 {
 
   public void coveredByUnitTest() {
     System.out.println("This method is covered by unit test");
-    System.out.println("Just testing");
+    // Some updates
+    int var = 3;
+    int result = 4 / var;
+
+    System.out.println("The result: " + result);
   }
 
   public void coveredByIntegrationTest() {
