@@ -34,26 +34,11 @@ jobs:
       with:
         output: ./results
 
-    - name: Upload full SARIF
+    - name: List results folder contents
+      run: ls -l ./results
+
+    - name: Upload full SARIF results
       uses: actions/upload-artifact@v4
       with:
         name: codeql-results
-        path: ./results/codeql.sarif
-
-
-
-#    - name: Get PR diff
-#      run: |
-#        git fetch origin ${{ github.event.pull_request.base.ref }}
-#        git diff origin/${{ github.event.pull_request.base.ref }} --unified=0 > pr.diff
-
-#    - name: Filter SARIF to changed lines
-#      run: |
-#        pip install sarif-tools
-#        sarif filter --input ./results/codeql.sarif --diff pr.diff --output ./results/filtered.sarif
-
-#    - name: Upload filtered SARIF
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: filtered-codeql-results
-#        path: ./results/filtered.sarif
+        path: ./results
