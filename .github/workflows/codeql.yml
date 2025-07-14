@@ -1,6 +1,10 @@
 name: CodeQL
 
 on:
+  push:
+    branches:
+      - main
+      - 'releases/**'
   pull_request:
     types: [opened, synchronize]
 
@@ -29,7 +33,14 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         output: ./results
-        format: sarif
+
+    - name: Upload full SARIF
+      uses: actions/upload-artifact@v4
+      with:
+        name: codeql-results
+        path: ./results/codeql.sarif
+
+
 
 #    - name: Get PR diff
 #      run: |
