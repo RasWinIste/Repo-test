@@ -25,6 +25,7 @@ jobs:
       with:
         languages: java
         queries: ./codeql
+        disable-default-queries: true
 
     - name: Build project
       run: mvn clean install -DskipTests
@@ -33,9 +34,6 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         output: ./results
-
-    - name: List results folder contents
-      run: ls -l ./results
 
     - name: Upload full SARIF results
       uses: actions/upload-artifact@v4
