@@ -4,7 +4,7 @@ on:
     branches:
       - main
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize]
 jobs:
   build:
     name: Build and analyze
@@ -34,3 +34,53 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=RasWinIste_Repo-test
+
+
+name: CodeQL PR-Only Analysis
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      pull-requests: read
+      contents: read
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: java
+        queries: ./codeql
+
+    - name: Build project
+      run: mvn clean install -DskipTests
+
+    - name: Perform CodeQL analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        output: ./results
+        format: sarif
+
+#    - name: Get PR diff
+#      run: |
+#        git fetch origin ${{ github.event.pull_request.base.ref }}
+#        git diff origin/${{ github.event.pull_request.base.ref }} --unified=0 > pr.diff
+
+#    - name: Filter SARIF to changed lines
+#      run: |
+#        pip install sarif-tools
+#        sarif filter --input ./results/codeql.sarif --diff pr.diff --output ./results/filtered.sarif
+
+#    - name: Upload filtered SARIF
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: filtered-codeql-results
+#        path: ./results/filtered.sarif
