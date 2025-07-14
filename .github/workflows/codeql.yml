@@ -1,3 +1,12 @@
+name: CodeQL
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+
 jobs:
   codeql-custom-query:
     runs-on: ubuntu-latest
@@ -24,7 +33,7 @@ jobs:
 
     - name: Run custom CodeQL query manually
       run: |
-        codeql query run --database=codeql-database ./codeql/my-custom-query.ql --output=custom-results.bqrs
+        codeql query run --database=codeql-database ./codeql/classAfferentCoupling.ql --output=custom-results.bqrs
         codeql bqrs decode --format=sarif-latest --output=custom-results.sarif custom-results.bqrs
 
     - name: Upload SARIF artifact
