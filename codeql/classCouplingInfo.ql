@@ -1,15 +1,10 @@
 /**
  * @name Coupling metrics for Java classes (excluding tests)
- * @description Computes afferent and efferent coupling for Java classes in source files, excluding files in test directories.
- * @kind metric
- * @problem.severity recommendation
- * @id java/metrics/class-coupling
- * @tags maintainability
- *       metrics
- *       java
- * @precision medium
+ * @description Computes afferent and efferent coupling for Java classes excluding test files.
+ * @kind table
+ * @id my-org/java-class-coupling
+ * @tags maintainability, metrics, java
  */
-
 import java
 
 from MetricRefType mr
