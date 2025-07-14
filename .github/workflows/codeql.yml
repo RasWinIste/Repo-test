@@ -23,21 +23,22 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: java
-        # no queries here, so no default queries run automatically
 
     - name: Build project
       run: mvn clean install -DskipTests
 
-    - name: Perform CodeQL database build only
+    - name: Autobuild database
       uses: github/codeql-action/autobuild@v3
 
-    - name: Run custom CodeQL query manually
-      run: |
-        codeql query run --database=codeql-database ./codeql/classAfferentCoupling.ql --output=custom-results.bqrs
-        codeql bqrs decode --format=sarif-latest --output=custom-results.sarif custom-results.bqrs
+    - name: Set up CodeQL CLI
+      uses: github/codeql-action/setup@v2
 
-    - name: Upload SARIF artifact
-      uses: actions/upload-artifact@v4
+    - name: Run custom query
+      run: |
+        codeql query run --database=codeql-database ./codeql/my-query.ql --output=results.bqrs
+        codeql bqrs decode --format=sarif-latest --output=results.sarif results.bqrs
+
+    - name: Upload SARIF
+      uses: github/codeql-action/upload-sarif@v1
       with:
-        name: custom-codeql-results
-        path: custom-results.sarif
+        sarif_file: results.sarif
