@@ -1,4 +1,4 @@
-name: CodeQL PR-Only Analysis
+name: CodeQL
 
 on:
   pull_request:

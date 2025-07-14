@@ -1,7 +1,7 @@
 /**
  * @name Coupling metrics for Java classes (excluding tests)
  * @description Computes afferent and efferent coupling for Java classes in source files, excluding files in test directories.
- * @kind table
+ * @kind metric
  * @problem.severity recommendation
  * @id java/metrics/class-coupling
  * @tags maintainability
