@@ -4,8 +4,8 @@ public class Module1 {
 
   public void coveredByUnitTest() {
     System.out.println("This method is covered by unit test");
-    System.out.println("Just testing");
-    System.out.println("CodeQL");
+
+    System.out.println("Testing CodeQL");
   }
 
   public void coveredByIntegrationTest() {
