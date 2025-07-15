@@ -4,11 +4,12 @@ on:
   push:
     branches:
       - main
+      - 'releases/**'
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  codeql-custom-query:
+  codeql:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
@@ -23,22 +24,18 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: java
+        queries: ./codeql
 
     - name: Build project
       run: mvn clean install -DskipTests
 
-    - name: Autobuild database
-      uses: github/codeql-action/autobuild@v3
-
-    - name: Set up CodeQL CLI
-      uses: github/codeql-action/setup@v2
-
-    - name: Run custom query
-      run: |
-        codeql query run --database=codeql-database ./codeql/my-query.ql --output=results.bqrs
-        codeql bqrs decode --format=sarif-latest --output=results.sarif results.bqrs
-
-    - name: Upload SARIF
-      uses: github/codeql-action/upload-sarif@v1
+    - name: Perform CodeQL analysis
+      uses: github/codeql-action/analyze@v3
       with:
-        sarif_file: results.sarif
+        output: ./results
+
+    - name: Upload full SARIF results
+      uses: actions/upload-artifact@v4
+      with:
+        name: codeql-results
+        path: ./results

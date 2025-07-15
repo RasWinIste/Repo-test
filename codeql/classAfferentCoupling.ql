@@ -4,7 +4,7 @@
  * @kind metric
  * @metricType count
  * @language java
- * @tags metrics, coupling
+ * @tags summary 
  * @id java/afferent-coupling
  */
 import java
