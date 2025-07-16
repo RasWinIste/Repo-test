@@ -9,10 +9,10 @@
  */
 import java
 
-from MetricRefType mr
+from MetricRefType c
 where 
-  mr instanceof Class and 
-  mr.getFile().isSourceFile() and 
-  not mr.getFile().getRelativePath().matches("%/test/%") and
-  not mr.getFile().getRelativePath().matches("test/%")
-select mr.getQualifiedName(), mr.getAfferentCoupling()
+  c instanceof Class and 
+  c.getFile().isSourceFile() and 
+  not c.getFile().getRelativePath().matches("%/test/%") and
+  not c.getFile().getRelativePath().matches("test/%")
+select c.getFile().getRelativePath(), c.getAfferentCoupling()
