@@ -30,7 +30,9 @@ public class Module1 {
     int var_4 = 1;
     int var_5 = 2;
     int var_6 = var_4 - var_5;
-
+    
+    // Tests
+    
     System.out.print("Calculating for fun : " + var_3);
     System.out.print("Hope you like this test");
   }
