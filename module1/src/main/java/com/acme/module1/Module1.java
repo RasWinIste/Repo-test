@@ -27,9 +27,9 @@ public class Module1 {
     System.out.print("Calculating for fun : " + var_3);
     System.out.print("Hope you like this test");
 
-    int var_0 = 1;
-    int var_1 = 2;
-    int var_3 = var_0 - var_1;
+    int var_4 = 1;
+    int var_5 = 2;
+    int var_6 = var_4 - var_5;
 
     System.out.print("Calculating for fun : " + var_3);
     System.out.print("Hope you like this test");
